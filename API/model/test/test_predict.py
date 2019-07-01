@@ -26,7 +26,15 @@ def test_make_prediction_full_set():
   assert subject is not None
   assert len(subject['prediction']) == 21
 
-def test_api():
+def test_api_health():
+  response = requests.get('http://127.0.0.1:5000/health')
+  print("data returned",response)
+
+  # then
+  assert response == 'ok'
+
+
+def test_api_prediction():
   test_data = pd.read_csv(test_csv)
   multiple_data_test =  test_data.to_json(orient='records')
   response = requests.post('http://127.0.0.1:5000/predict',json = multiple_data_test)

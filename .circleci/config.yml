@@ -1,21 +1,83 @@
 version: 2
+
+defaults: &defaults
+  docker:
+      - image: circleci/python:3.7.2
+    working_directory: ~/project
+
+prepare_env: &prepare_env
+    run:
+      name: Create venv
+      command: |
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install --upgrade pip
+
+fetch_data: &fetch_data
+      run: 
+        name: Create venvSet script permission and fetch data
+        command: |
+        source venv/bin/activate
+        chmod +x ./scripts/fetch_kaggle_dataset.sh
+        ./scripts/fetch_kaggle_dataset.sh
+
 jobs:
   test_regression_model:
-    working_directory: ~/project
-    docker:
-      - image: circleci/python:3.7.2
+    <<: *defaults
     steps:
       - checkout
+      - *prepare_env
       - run:
-          name: Runnning tests
+          name: Install requirements
           command: |
-            virtualenv venv
             . venv/bin/activate
-            pip install --upgrade pip
             pip install -r API/model/requirements.txt
-            chmod +x ./scripts/fetch_kaggle_dataset.sh
-            ./scripts/fetch_kaggle_dataset.sh
-            py.test ./test.py
+      - *fetch_data
+      - run:
+          name: Train model
+          command: |
+          . venv/bin/activate
+          pytyon3 scripts/run_training.py
+      - run:
+          name: Test the model
+          command: |
+            . venv/bin/activate
+            py.test tests/model_testing.py
+
+  test_server:
+    <<: *defaults
+    steps: 
+      - checkout
+      - run:
+          name: Run server
+          command: |
+            . venv/bin/activate
+            pip install -r API/api/requirements.txt
+            set FLASK_APP=run.py
+            python3 run.py
+      - run:
+          name: Test server health
+          command: |
+            . venv/bin/activate
+            py.test tests/check_server_health.py
+      - run: 
+          name: Test api prediction endpoint
+          command: |
+            . venv/bin/activate
+            py.test tests/check_api_prediction_endpoint.py
+
+  workflows:
+  version: 2
+  test-all:
+    jobs:
+      - test_regression_model
+      - test_server:
+        - requires:
+          -test_regression_model
+
+      
+
+
 workflows:
   version: 2
   test-all:

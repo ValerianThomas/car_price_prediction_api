@@ -1,5 +1,0 @@
-# api 
-flask==1.0.2
-
-# local regression_model package
--e "/Users/valerian/Desktop/Machine Learning Production/03. Hands on/deploying-machine-learning-models/packages/model"
