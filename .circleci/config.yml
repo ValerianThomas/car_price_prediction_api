@@ -12,10 +12,10 @@ jobs:
             virtualenv venv
             . venv/bin/activate
             pip install --upgrade pip
-            pip install -r API/api/model/requirements.txt
+            pip install -r API/model/requirements.txt
             chmod +x ./scripts/fetch_kaggle_dataset.sh
             ./scripts/fetch_kaggle_dataset.sh
-            py.test -vv API/api/model/test
+            py.test -vv API/model/test
 workflows:
   version: 2
   test-all:
