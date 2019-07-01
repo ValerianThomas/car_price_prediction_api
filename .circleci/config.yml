@@ -37,7 +37,7 @@ jobs:
           name: Train model
           command: |
             . venv/bin/activate
-            pytyon3 scripts/run_training.py
+            python3 scripts/run_training.py
       - run:
           name: Test the model
           command: |

@@ -1,5 +1,7 @@
 # api 
 flask==1.0.2
-
+numpy==1.15.4
+scikit-learn==0.20.2
+pandas==0.23.4
 # testing requirements
 pytest==4.0.2
