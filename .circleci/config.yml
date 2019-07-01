@@ -17,9 +17,9 @@ fetch_data: &fetch_data
       run: 
         name: Create venvSet script permission and fetch data
         command: |
-        source venv/bin/activate
-        chmod +x ./scripts/fetch_kaggle_dataset.sh
-        ./scripts/fetch_kaggle_dataset.sh
+          source venv/bin/activate
+          chmod +x ./scripts/fetch_kaggle_dataset.sh
+          ./scripts/fetch_kaggle_dataset.sh
 
 jobs:
   test_regression_model:
