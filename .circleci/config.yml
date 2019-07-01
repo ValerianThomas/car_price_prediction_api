@@ -15,7 +15,7 @@ jobs:
             pip install -r API/model/requirements.txt
             chmod +x ./scripts/fetch_kaggle_dataset.sh
             ./scripts/fetch_kaggle_dataset.sh
-            py.test -vv API/model/test
+            py.test ./test.py
 workflows:
   version: 2
   test-all:
