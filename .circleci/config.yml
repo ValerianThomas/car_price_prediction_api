@@ -71,8 +71,9 @@ jobs:
 workflows:
   version: 2
   build:
-    jobs:
-      - test_regression_model
-      - test_server:
-        requires:
-          - test_regression_model
+    test-all:
+      jobs:
+        - test_regression_model
+        - test_server:
+          requires:
+            - test_regression_model
