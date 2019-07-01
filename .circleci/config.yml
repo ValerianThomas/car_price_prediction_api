@@ -67,8 +67,8 @@ jobs:
             py.test tests/check_api_prediction_endpoint.py
 
   workflows:
-  version: 2
-  test-all:
-    jobs:
-      - test_regression_model
-      - test_server
+    version: 2
+    test-all:
+      jobs:
+        - test_regression_model
+        - test_server
