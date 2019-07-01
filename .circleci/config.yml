@@ -66,9 +66,10 @@ jobs:
             . venv/bin/activate
             py.test tests/check_api_prediction_endpoint.py
 
-  workflows:
-    version: 2
-    test-all:
-      jobs:
-        - test_regression_model
-        - test_server
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test_regression_model
+      - test_server
