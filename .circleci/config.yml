@@ -48,6 +48,7 @@ jobs:
     <<: *defaults
     steps: 
       - checkout
+      - *prepare_env
       - run:
           name: Run server
           command: |
