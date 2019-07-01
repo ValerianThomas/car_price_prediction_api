@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   docker:
       - image: circleci/python:3.7.2
-    working_directory: ~/project
+  working_directory: ~/project
 
 prepare_env: &prepare_env
     run:
