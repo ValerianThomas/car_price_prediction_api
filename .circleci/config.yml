@@ -70,9 +70,9 @@ jobs:
 
 workflows:
   version: 2
-  test-all:
+  build-test-and-deploy:
     jobs:
       - test_regression_model
       - test_server:
-        requires:
+          requires:
           - test_regression_model
