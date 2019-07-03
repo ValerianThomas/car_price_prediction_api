@@ -60,7 +60,7 @@ jobs:
       - run:
           name: wait for server to boot
           command: |
-             wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:5000/health
+             wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 50 http://localhost:5000/health
       - run:
           name: Test server health
           command: |
