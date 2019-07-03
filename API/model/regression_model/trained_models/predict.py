@@ -13,3 +13,16 @@ def make_prediction(*,input_data) -> None :
   output = np.expm1(prediction)
   response = {'prediction':output}
   return response
+
+
+def get_score(*,input_data) -> None :
+  previews_score = pickle.load(open('previews_score.sav','rb'))
+  data = pd.read_json(input_data)
+  y_true = data['price']
+  score = pickle.load(open(MODEL_SAV,'rb')).score(data,y_true)
+  
+  if score > previews_score - 0.05 :
+    pickle.dump(score,open('previews_score.sav','wb'))
+    return True 
+  else :
+    return False

@@ -43,7 +43,11 @@ jobs:
           command: |
             . venv/bin/activate
             py.test model_testing.py
-
+      - run:
+          name: no model performance back tracking
+          command: |
+          . venv/bin/activate
+            py.test model_predictions_not_decreased.py
   test_server:
     <<: *defaults
     steps: 

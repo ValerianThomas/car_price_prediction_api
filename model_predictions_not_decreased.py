@@ -1,0 +1,2 @@
+from API.model.test.test_predict import test_if_prediction_not_decreased
+test_if_prediction_not_decreased()
