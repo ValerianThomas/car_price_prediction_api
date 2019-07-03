@@ -61,12 +61,12 @@ jobs:
           name: Test server health
           command: |
             . venv/bin/activate
-            py.test check_server_health.py
+            pytest check_server_health.py
       - run: 
           name: Test api prediction endpoint
           command: |
             . venv/bin/activate
-            py.test check_api_prediction_endpoint.py
+            pytest check_api_prediction_endpoint.py
 
 
 workflows:
