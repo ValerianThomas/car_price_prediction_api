@@ -31,7 +31,7 @@ def test_api_health():
   print("data returned",response)
 
   # then
-  assert response == 'ok'
+  assert response.status == 200
 
 
 def test_api_prediction():
