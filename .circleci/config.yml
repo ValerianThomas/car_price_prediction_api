@@ -56,6 +56,7 @@ jobs:
             pip install -r API/api/requirements.txt
             set FLASK_APP=run.py
             python3 run.py
+          background: true
       - run:
           name: Test server health
           command: |
