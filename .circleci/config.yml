@@ -78,6 +78,4 @@ workflows:
   build-test-and-deploy:
     jobs:
       - test_regression_model
-      - test_server:
-          requires:
-          - test_regression_model
+      - test_server
