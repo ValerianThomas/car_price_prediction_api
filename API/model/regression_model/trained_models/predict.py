@@ -16,12 +16,16 @@ def make_prediction(*,input_data) -> None :
 
 
 def get_score(*,input_data) -> None :
-  previews_score = pickle.load(open('previews_score.sav','rb'))
+try :
+    previews_score = pickle.load(open('previews_score.sav','rb'))
+except :
+    previews_score = None
   data = pd.read_json(input_data)
   y_true = data['price']
   score = pickle.load(open(MODEL_SAV,'rb')).score(data,y_true)
   
-  if score > previews_score - 0.05 :
+
+  if score > previews_score - 0.05 or previews_score == None :
     pickle.dump(score,open('previews_score.sav','wb'))
     return True 
   else :
