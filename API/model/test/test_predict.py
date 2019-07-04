@@ -43,7 +43,6 @@ def test_api_prediction():
   print("response",response)
 
 def test_if_prediction_not_decreased():
-  previous_score = pickle.load(open('previous_score.sav','rb'))
   run_training()
   test_data = pd.read_csv(test_csv)
   multiple_data_test =  test_data.to_json(orient='records')
