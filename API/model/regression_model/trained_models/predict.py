@@ -25,8 +25,9 @@ def get_score(*,input_data) -> None :
   y_true = data['price']
   score = pickle.load(open(MODEL_SAV,'rb')).score(data,y_true)
   
-
-  if score > previews_score - 0.05 or previews_score == None :
+  if previews_score == None :
+    pickle.dump(score,open('previews_score.sav','wb'))
+  elif score > previews_score - 0.05:
     pickle.dump(score,open('previews_score.sav','wb'))
     return True 
   else :
