@@ -27,6 +27,7 @@ def get_score(*,input_data) -> None :
   
   if previews_score == None :
     pickle.dump(score,open('previews_score.sav','wb'))
+    return True
   elif score > previews_score - 0.05:
     pickle.dump(score,open('previews_score.sav','wb'))
     return True 
