@@ -81,7 +81,13 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - test_regression_model
+      - test_regression_model:
+          filters:
+            branches:
+              only: master
       - test_server:
           requires:
             - test_regression_model
+          filters:
+            branches:
+              only: master
