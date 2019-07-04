@@ -27,11 +27,19 @@ jobs:
     steps:
       - checkout
       - *prepare_env
+      - restore_cache:
+          keys:
+            - py-deps-{{ checksum "API/model/requirements.txt" }}
       - run:
           name: Install requirements
           command: |
             . venv/bin/activate
             pip install -r API/model/requirements.txt
+      - save_cache:
+          key: py-deps-{{ checksum "API/model/requirements.txt" }}
+          paths:
+            - "/venv"
+
       - *fetch_data
       - run:
           name: Train model
